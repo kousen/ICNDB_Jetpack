@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.oreilly.icndb.JokeViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/cached_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="This is old data"
+            android:textSize="24sp"
+            android:text="@{viewModel.cachedValue}" />
+
+        <Button
+            android:id="@+id/refresh_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.onRefresh()}"
+            android:text="@string/get_joke" />
+    </LinearLayout>
+
+</layout>

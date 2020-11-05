@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ICNDB_Jetpack</string>
+    <string name="get_joke">Get Joke</string>
+</resources>
