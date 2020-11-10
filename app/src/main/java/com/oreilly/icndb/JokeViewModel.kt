@@ -1,23 +1,25 @@
 package com.oreilly.icndb
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class JokeViewModel(private val dataSource: DataSource) : ViewModel() {
-    val cachedValue = dataSource.cachedData
+class JokeViewModel(private val repository: Repository) : ViewModel() {
+    val first = MutableLiveData<String>("")
+
+    val last = MutableLiveData("")
+
+    val cachedValue = repository.cachedData
 
     fun onRefresh() {
         viewModelScope.launch {
-            dataSource.fetchNewData()
+            repository.fetchNewData(first.value ?: "Jean-Luc", last.value ?: "Picard")
         }
     }
 }
 
 object LiveDataVMFactory : ViewModelProvider.Factory {
-    private val dataSource = DefaultDataSource(Dispatchers.IO)
+    private val dataSource = DefaultRepository(Dispatchers.IO)
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         @Suppress("UNCHECKED_CAST")

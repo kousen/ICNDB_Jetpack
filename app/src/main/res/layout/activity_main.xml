@@ -22,6 +22,24 @@
             android:textSize="24sp"
             android:text="@{viewModel.cachedValue}" />
 
+        <EditText
+            android:id="@+id/first_name"
+            android:text="@={viewModel.first}"
+            android:inputType="textPersonName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/first_name"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:id="@+id/last_name"
+            android:text="@={viewModel.last}"
+            android:inputType="textPersonName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/last_name"
+            android:importantForAutofill="no" />
+
         <Button
             android:id="@+id/refresh_button"
             android:layout_width="match_parent"

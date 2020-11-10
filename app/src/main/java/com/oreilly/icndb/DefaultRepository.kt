@@ -8,31 +8,37 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class DefaultDataSource(private val ioDispatcher: CoroutineDispatcher) : DataSource {
+class DefaultRepository(private val ioDispatcher: CoroutineDispatcher) : Repository {
     private val _cachedData = MutableLiveData("Old joke")
     override val cachedData: LiveData<String>
         get() = _cachedData
 
-    override suspend fun fetchNewData() {
+    override suspend fun fetchNewData(first: String, last: String) {
         withContext(Dispatchers.Main) {
             _cachedData.value = "Getting new joke..."
-            _cachedData.value = getJokeOverNetwork()
+            _cachedData.value = getJokeOverNetwork(first, last)
         }
     }
 
-    private suspend fun getJokeOverNetwork(): String =
+    private suspend fun getJokeOverNetwork(first: String, last: String): String =
         withContext(ioDispatcher) {
-            // delay(1000)
+            val queryString = if (first.isNotEmpty() || last.isNotEmpty()) {
+                "&firstName=$first&lastName=$last"
+            } else ""
             Gson().fromJson(
-                URL("http://api.icndb.com/jokes/random?limitTo=[nerdy]").readText(),
+                URL("$BASE$queryString").readText(),
                 JokeResponse::class.java
             ).value.joke
         }
+
+    companion object {
+        const val BASE = "http://api.icndb.com/jokes/random?limitTo=[nerdy]"
+    }
 }
 
-interface DataSource {
+interface Repository {
     val cachedData: LiveData<String>
-    suspend fun fetchNewData()
+    suspend fun fetchNewData(first: String, last: String)
 }
 
 data class JokeValue(
