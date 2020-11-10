@@ -19,7 +19,7 @@ class JokeViewModel(private val repository: Repository) : ViewModel() {
 }
 
 object LiveDataVMFactory : ViewModelProvider.Factory {
-    private val dataSource = DefaultRepository(Dispatchers.IO)
+    private val dataSource = RetrofitRepository(Dispatchers.IO)
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         @Suppress("UNCHECKED_CAST")

@@ -35,19 +35,3 @@ class DefaultRepository(private val ioDispatcher: CoroutineDispatcher) : Reposit
         const val BASE = "http://api.icndb.com/jokes/random?limitTo=[nerdy]"
     }
 }
-
-interface Repository {
-    val cachedData: LiveData<String>
-    suspend fun fetchNewData(first: String, last: String)
-}
-
-data class JokeValue(
-    val id: Int,
-    val joke: String,
-    val categories: List<String>
-)
-
-data class JokeResponse(
-    val type: String,
-    val value: JokeValue
-)
