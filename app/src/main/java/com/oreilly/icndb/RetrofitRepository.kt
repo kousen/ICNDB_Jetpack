@@ -8,7 +8,7 @@ import kotlinx.coroutines.withContext
 
 class RetrofitRepository(private val ioDispatcher: CoroutineDispatcher) : Repository {
 
-    private val service = AstroService.create()
+    private val service = JokeService.create()
 
     private val _cachedData = MutableLiveData("Old joke")
     override val cachedData: LiveData<String>

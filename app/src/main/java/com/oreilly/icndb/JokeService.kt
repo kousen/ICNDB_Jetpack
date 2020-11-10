@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface AstroService {
+interface JokeService {
 
     @GET("jokes/random")
     suspend fun getResponse(
@@ -19,7 +19,7 @@ interface AstroService {
     companion object {
         private const val BASE = "http://api.icndb.com/"
 
-        fun create(): AstroService {
+        fun create(): JokeService {
             val logger = HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BASIC
             }
@@ -33,7 +33,7 @@ interface AstroService {
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-                .create(AstroService::class.java)
+                .create(JokeService::class.java)
         }
     }
 }
