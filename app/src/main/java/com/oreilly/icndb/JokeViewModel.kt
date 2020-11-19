@@ -1,11 +1,12 @@
 package com.oreilly.icndb
 
+import android.view.View
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class JokeViewModel(private val repository: Repository) : ViewModel() {
-    val first = MutableLiveData<String>("")
+    val first = MutableLiveData("")
 
     val last = MutableLiveData("")
 
