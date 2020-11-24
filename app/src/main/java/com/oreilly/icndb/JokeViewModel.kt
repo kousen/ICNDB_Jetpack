@@ -1,6 +1,5 @@
 package com.oreilly.icndb
 
-import android.view.View
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
