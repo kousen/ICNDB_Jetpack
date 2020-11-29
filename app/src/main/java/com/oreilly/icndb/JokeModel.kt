@@ -1,6 +1,5 @@
 package com.oreilly.icndb
 
-
 data class JokeValue(
     val id: Int,
     val joke: String,
